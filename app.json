@@ -32,7 +32,19 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      ["expo-font", {
+        "fonts": [
+          "./assets/fonts/Lora-Bold.ttf",
+          "./assets/fonts/Lora-Medium.ttf",
+          "./assets/fonts/Lora-Regular.ttf",
+          "./assets/fonts/Lora-SemiBold.ttf",
+          "./assets/fonts/Manrope-Bold.ttf",
+          "./assets/fonts/Manrope-Medium.ttf",
+          "./assets/fonts/Manrope-Regular.ttf",
+          "./assets/fonts/Manrope-SemiBold.ttf"
+        ]
+      }]
     ],
     "experiments": {
       "typedRoutes": true

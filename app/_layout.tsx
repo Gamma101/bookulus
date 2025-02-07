@@ -1,39 +1,33 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
+import { SplashScreen, Stack, useRouter } from "expo-router";
+import "../global.css";
+import { useFonts } from "expo-font"
+import { useEffect } from "react";
+import { ReaderProvider } from '@epubjs-react-native/core';
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+
+  const [loaded, error] = useFonts({
+    'Lora-Bold': require('../assets/fonts/Lora-Bold.ttf'),
+    'Lora-Medium': require('../assets/fonts/Lora-Medium.ttf'),
+    'Lora-Regular': require('../assets/fonts/Lora-Regular.ttf'),
+    'Lora-SemiBold': require('../assets/fonts/Lora-SemiBold.ttf'),
+    'Manrope-Bold': require('../assets/fonts/Manrope-Bold.ttf'),
+    'Manrope-Medium': require('../assets/fonts/Manrope-Medium.ttf'),
+    'Manrope-Regular': require('../assets/fonts/Manrope-Regular.ttf'),
+    'Manrope-SemiBold': require('../assets/fonts/Manrope-SemiBold.ttf')
   });
 
   useEffect(() => {
-    if (loaded) {
+    if (loaded || error) {
       SplashScreen.hideAsync();
     }
-  }, [loaded]);
+    
+  },[])
 
-  if (!loaded) {
+  if (!loaded && !error) {
     return null;
   }
 
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+  return <ReaderProvider>
+    <Stack   screenOptions={{headerShown: false, animation:"fade"}} />;
+    </ReaderProvider>
 }
