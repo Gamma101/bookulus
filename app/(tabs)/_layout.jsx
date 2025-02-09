@@ -22,9 +22,8 @@ export default function TabLayout() {
         <Tabs
         screenOptions={
           {headerShown: false, 
-            tabBarStyle: {backgroundColor: "#034548", borderTopWidth: 2, borderTopColor: "#007e7e"}, 
+            tabBarStyle: {backgroundColor: "#034548"}, 
             tabBarActiveTintColor: "#CDC3A3", 
-            animation: "fade", 
             tabBarButton: (props) => (
               <TouchableOpacity {...props} activeOpacity={1}> {/* Установка activeOpacity=1 */}
                 {props.children}
